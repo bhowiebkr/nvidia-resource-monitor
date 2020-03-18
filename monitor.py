@@ -1,5 +1,7 @@
 import sys
-from PySide2 import QtCore, QtGui, QtWidgets, QtCharts
+from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtGui import QPalette, QColor
+from PySide2.QtCore import Qt, QTimer
 from PySide2.QtCharts import QtCharts
 from pynvml import *
 
@@ -10,24 +12,24 @@ FREQUENCY = 10
 MAX_DATAPOINTS = 500
 
 # Dark theme setup
-palette = QtGui.QPalette()
-palette.setColor(QtGui.QPalette.Window, QtGui.QColor(27, 35, 38))
-palette.setColor(QtGui.QPalette.WindowText, QtGui.QColor(234, 234, 234))
-palette.setColor(QtGui.QPalette.Base, QtGui.QColor(27, 35, 38))
-palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Base, QtGui.QColor(27 + 5, 35 + 5, 38 + 5))
-palette.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(12, 15, 16))
-palette.setColor(QtGui.QPalette.ToolTipBase, QtGui.QColor(27, 35, 38))
-palette.setColor(QtGui.QPalette.ToolTipText, QtCore.Qt.white)
-palette.setColor(QtGui.QPalette.Text, QtGui.QColor(200, 200, 200))
-palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(100, 100, 100))
-palette.setColor(QtGui.QPalette.Button, QtGui.QColor(27, 35, 38))
-palette.setColor(QtGui.QPalette.ButtonText, QtCore.Qt.white)
-palette.setColor(QtGui.QPalette.BrightText, QtGui.QColor(100, 215, 222))
-palette.setColor(QtGui.QPalette.Link, QtGui.QColor(126, 71, 130))
-palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(126, 71, 130))
-palette.setColor(QtGui.QPalette.HighlightedText, QtCore.Qt.white)
-palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtCore.Qt.black)
-palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, QtGui.QColor(12, 15, 16))
+palette = QPalette()
+palette.setColor(QPalette.Window, QColor(27, 35, 38))
+palette.setColor(QPalette.WindowText, QColor(234, 234, 234))
+palette.setColor(QPalette.Base, QColor(27, 35, 38))
+palette.setColor(QPalette.Disabled, QPalette.Base, QColor(27 + 5, 35 + 5, 38 + 5))
+palette.setColor(QPalette.AlternateBase, QColor(12, 15, 16))
+palette.setColor(QPalette.ToolTipBase, QColor(27, 35, 38))
+palette.setColor(QPalette.ToolTipText, Qt.white)
+palette.setColor(QPalette.Text, QColor(200, 200, 200))
+palette.setColor(QPalette.Disabled, QPalette.Text, QColor(100, 100, 100))
+palette.setColor(QPalette.Button, QColor(27, 35, 38))
+palette.setColor(QPalette.ButtonText, Qt.white)
+palette.setColor(QPalette.BrightText, QColor(100, 215, 222))
+palette.setColor(QPalette.Link, QColor(126, 71, 130))
+palette.setColor(QPalette.Highlight, QColor(126, 71, 130))
+palette.setColor(QPalette.HighlightedText, Qt.white)
+palette.setColor(QPalette.Disabled, QPalette.Light, Qt.black)
+palette.setColor(QPalette.Disabled, QPalette.Shadow, QColor(12, 15, 16))
 
 
 class NvidiaResources(QtWidgets.QWidget):
@@ -42,7 +44,7 @@ class NvidiaResources(QtWidgets.QWidget):
         except AttributeError:
             logging.warning("Unable to load settings. First time opening the tool?")
 
-        self.timer = QtCore.QTimer(self)
+        self.timer = QTimer(self)
         self.timer.timeout.connect(self.Time)
         self.timer.start(FREQUENCY)
         self.index = MAX_DATAPOINTS
@@ -51,12 +53,13 @@ class NvidiaResources(QtWidgets.QWidget):
         self.chart.setTheme(QtCharts.QChart.ChartThemeDark)
         self.series = QtCharts.QLineSeries(self)
         self.chart.legend().setVisible(False)
+        self.chart.addSeries(self.series)
 
         self.value_axis = QtCharts.QValueAxis()
         self.value_axis.setTickCount(5)
         mem_total = nvmlDeviceGetMemoryInfo(handle).total / 1024 / 1024
         self.value_axis.setMax(mem_total)
-        self.chart.addAxis(self.value_axis, QtCore.Qt.AlignLeft)
+        self.chart.addAxis(self.value_axis, Qt.AlignLeft)
 
         for i in range(MAX_DATAPOINTS):
             self.series.append(i, 0)
