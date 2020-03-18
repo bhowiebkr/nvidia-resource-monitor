@@ -1,6 +1,5 @@
 import sys
 from PySide2 import QtCore, QtGui, QtWidgets, QtCharts
-from time import strftime
 from PySide2.QtCharts import QtCharts
 from pynvml import *
 
