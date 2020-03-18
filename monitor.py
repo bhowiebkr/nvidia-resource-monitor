@@ -14,16 +14,12 @@ palette = QtGui.QPalette()
 palette.setColor(QtGui.QPalette.Window, QtGui.QColor(27, 35, 38))
 palette.setColor(QtGui.QPalette.WindowText, QtGui.QColor(234, 234, 234))
 palette.setColor(QtGui.QPalette.Base, QtGui.QColor(27, 35, 38))
-palette.setColor(
-    QtGui.QPalette.Disabled, QtGui.QPalette.Base, QtGui.QColor(27 + 5, 35 + 5, 38 + 5)
-)
+palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Base, QtGui.QColor(27 + 5, 35 + 5, 38 + 5))
 palette.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(12, 15, 16))
 palette.setColor(QtGui.QPalette.ToolTipBase, QtGui.QColor(27, 35, 38))
 palette.setColor(QtGui.QPalette.ToolTipText, QtCore.Qt.white)
 palette.setColor(QtGui.QPalette.Text, QtGui.QColor(200, 200, 200))
-palette.setColor(
-    QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(100, 100, 100)
-)
+palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(100, 100, 100))
 palette.setColor(QtGui.QPalette.Button, QtGui.QColor(27, 35, 38))
 palette.setColor(QtGui.QPalette.ButtonText, QtCore.Qt.white)
 palette.setColor(QtGui.QPalette.BrightText, QtGui.QColor(100, 215, 222))
@@ -31,9 +27,7 @@ palette.setColor(QtGui.QPalette.Link, QtGui.QColor(126, 71, 130))
 palette.setColor(QtGui.QPalette.Highlight, QtGui.QColor(126, 71, 130))
 palette.setColor(QtGui.QPalette.HighlightedText, QtCore.Qt.white)
 palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtCore.Qt.black)
-palette.setColor(
-    QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, QtGui.QColor(12, 15, 16)
-)
+palette.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, QtGui.QColor(12, 15, 16))
 
 
 class NvidiaResources(QtWidgets.QWidget):
